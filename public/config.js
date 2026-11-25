@@ -18,12 +18,12 @@ window.NB_CONFIG = {
   /* ══════════════════════════════════════════════════════════════════════════════════════════════════════════
      MODE DOUBLE — TYPE DE BOUTIQUE
        'auto' : boutique classique (panier + commande WhatsApp) — comportement d'origine.
-       'auto'     : CONCESSIONNAIRE AUTOMOBILE — fiche technique, statut Disponible/Réservé/Vendu, filtres, jusqu'à 12 photos,
+       'boutique'    : CONCESSIONNAIRE AUTOMOBILE — fiche technique, statut Disponible/Réservé/Vendu, filtres, jusqu'à 12 photos,
                     « Je suis intéressé / Demander un essai / Réserver une visite », paiement échelonné, reprise, commerciaux.
                     Nécessite le script SQL du mode auto (voir le guide). Les fichiers auto.js, auto.css et vendeur-auto.js
                     ne sont téléchargés QUE dans ce mode.
      ══════════════════════════════════════════════════════════════════════════════════════════════════════════ */
-  typeBoutique: 'boutique',
+  typeBoutique: 'auto',
 
   /* Réglages du mode 'auto' (ignorés en mode 'boutique') */
   auto: {
