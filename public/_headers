@@ -1,0 +1,84 @@
+# ══════════════════════════════════════════════════════════════════════════════════════════════════
+#  _headers — En-têtes envoyés par Cloudflare Pages avec chaque fichier du site
+#  (les lignes qui commencent par # sont des commentaires : Cloudflare les ignore)
+# ══════════════════════════════════════════════════════════════════════════════════════════════════
+#
+#  POURQUOI LE CACHE HTTP SE RÈGLE ICI ET PAS DANS config.js ?
+#    Ces en-têtes sont envoyés par le SERVEUR (Cloudflare) AVANT que le moindre JavaScript ne s'exécute.
+#    config.js tourne dans le navigateur du visiteur : il arrive trop tard pour décider combien de temps
+#    garder les fichiers. C'est donc ce fichier-ci qui fait foi.
+#
+#  RÉSUMÉ DES DURÉES (modifiables ci-dessous)
+#    • Fichiers .js et .css ............ 1 h (max-age=3600), puis réutilisés pendant 24 h le temps que la
+#                                        nouvelle version arrive en arrière-plan (stale-while-revalidate=86400).
+#    • Icônes de l'application ........ 7 jours.
+#    • Logo (dossier logo/) ........... 1 jour.
+#    • Pages HTML (index, vendeur) .... jamais gardées : toujours vérifiées (index) ou jamais stockées (vendeur).
+#    • config.js, sw.js, manifest ..... jamais gardés : vos réglages s'appliquent tout de suite.
+#    • Données de la boutique ......... NON concernées : elles viennent de Supabase et suivent « cacheMinutes » (config.js).
+#    • Photos des produits ............ NON concernées : déjà gardées 1 an par Supabase (noms uniques, jamais réécrites).
+#
+#  POUR CHANGER UNE DURÉE : modifiez le nombre après « max-age= » (en SECONDES).
+#    60 = 1 min · 300 = 5 min · 3600 = 1 h · 86400 = 1 jour · 604800 = 7 jours.
+#    max-age=0 = le navigateur revérifie le fichier à chaque visite (comportement d'origine, le plus lent).
+#
+#  ⚠️ APRÈS CHAQUE MODIFICATION D'UN FICHIER .js OU .css : changez le numéro « ?v=… » dans index.html ET vendeur.html.
+#     Sinon, certains visiteurs garderont l'ancienne version jusqu'à la fin de la durée ci-dessus.
+#
+#  RÈGLE TECHNIQUE : les blocs s'appliquent dans l'ordre du fichier. « ! Cache-Control » retire la valeur posée par un bloc
+#  précédent avant d'en mettre une autre (sinon Cloudflare colle les deux valeurs ensemble, ce qui crée un conflit).
+# ══════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── Sécurité : toutes les pages et tous les fichiers ──
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=()
+  X-Frame-Options: SAMEORIGIN
+
+# ── Code du site : 1 h, puis mise à jour en arrière-plan ──
+/*.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/*.css
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# ── Images fixes ──
+/icons/*
+  Cache-Control: public, max-age=604800
+
+/logo/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# ── Pages HTML : toujours vérifiées (c'est elles qui contiennent les numéros ?v=) ──
+/
+  Cache-Control: no-cache
+
+/index.html
+  Cache-Control: no-cache
+
+# ── Espace vendeur : jamais stocké (Cloudflare peut aussi le servir sans « .html ») ──
+/vendeur.html
+  ! X-Frame-Options
+  X-Frame-Options: DENY
+  Cache-Control: no-store
+
+/vendeur
+  ! X-Frame-Options
+  X-Frame-Options: DENY
+  Cache-Control: no-store
+
+# ── Réglages : jamais gardés, pour que vos changements s'appliquent immédiatement ──
+/config.js
+  ! Cache-Control
+  Cache-Control: no-cache
+
+/sw.js
+  ! Cache-Control
+  Cache-Control: no-cache
+  Service-Worker-Allowed: /
+
+/manifest.json
+  Content-Type: application/manifest+json
+  Cache-Control: no-cache

@@ -1,0 +1,82 @@
+/* ============================================================================
+   auto.css — Styles du MODE CONCESSIONNAIRE (chargé uniquement si config.js > typeBoutique = 'auto')
+   Utilise les mêmes variables que style.css (--brand, --ink, --line, --r-md…) : le thème de config.js s'applique aussi ici.
+   ============================================================================ */
+
+/* ── Cartes de la grille ── */
+.auto-tags { margin: 0; color: var(--muted); font-size: .72rem; font-weight: 600; line-height: 1.35; }
+.auto-tags-fiche { font-size: .86rem; margin-top: 6px; }
+.auto-mention { flex-basis: 100%; color: var(--muted); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+.auto-statut {
+  position: absolute; top: 8px; right: 8px; z-index: 2; padding: 3px 9px; border-radius: 999px; font-size: .7rem; font-weight: 800;
+  color: #fff; letter-spacing: .3px; text-transform: uppercase; box-shadow: var(--sh-1);
+}
+.auto-statut-reserve { background: #d97706; }
+.auto-statut-vendu { background: #dc2626; }
+.auto-statut-fiche { position: static; display: inline-block; margin-bottom: 8px; }
+a.auto-vendu .card-img img { filter: grayscale(.7); opacity: .75; }
+.card-actions .btn:disabled { opacity: .7; cursor: default; }
+
+/* ── Barre de recherche et filtres ── */
+.auto-filtres { margin: 0 0 12px; }
+.af-ligne { display: flex; gap: 8px; }
+.af-recherche {
+  flex: 1; min-width: 0; min-height: 44px; border: 1.5px solid var(--line); border-radius: 999px; padding: 0 16px;
+  font-size: 16px; background: var(--card); color: var(--ink);
+}
+.af-recherche:focus, .auto-select:focus, .auto-input:focus, .auto-textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent); }
+.af-btn {
+  flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--brand); background: var(--brand-soft);
+  color: var(--brand-dark); font-weight: 800;
+}
+.af-panneau {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; margin-top: 10px; padding: 12px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--sh-1);
+}
+.af-panneau[hidden] { display: none; }
+@media (min-width: 900px) { .af-panneau { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.af-champ { display: grid; gap: 3px; font-size: .74rem; font-weight: 700; color: var(--muted); }
+.af-champ[hidden] { display: none; }
+.auto-select, .auto-input, .auto-textarea {
+  width: 100%; min-height: 42px; border: 1.5px solid var(--line); border-radius: var(--r-sm); padding: 8px 10px;
+  font-size: 16px; background: #fbfcfe; color: var(--ink); font-family: inherit;
+}
+.af-effacer { grid-column: 1 / -1; min-height: 40px; border: 0; background: transparent; color: var(--deal); font-weight: 700; text-decoration: underline; }
+.af-compteur { margin: 8px 2px 0; color: var(--muted); font-size: .8rem; font-weight: 600; }
+
+/* ── Fiche du véhicule ── */
+.auto-fiche { display: grid; grid-template-columns: auto 1fr; margin: 0; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.auto-fiche dt, .auto-fiche dd { margin: 0; padding: 9px 12px; border-bottom: 1px solid var(--line); font-size: .88rem; }
+.auto-fiche dt { color: var(--muted); font-weight: 600; background: #f8fafc; }
+.auto-fiche dd { color: var(--ink); font-weight: 700; overflow-wrap: anywhere; }
+.auto-fiche dt:nth-last-child(2), .auto-fiche dd:last-child { border-bottom: 0; }
+.auto-video {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 42px; padding: 0 16px; border-radius: 999px;
+  background: #0f172a; color: #fff; font-weight: 700; font-size: .88rem; text-decoration: none;
+}
+.auto-actions { grid-template-columns: 1fr 1fr auto; }
+.auto-actions .btn-order { grid-column: 1 / -1; }
+.auto-actions .btn-add { padding: 0 10px; font-size: .84rem; }
+@media (max-width: 380px) { .auto-actions { grid-template-columns: 1fr auto; } .auto-actions .btn-add { grid-column: 1 / 2; } }
+.auto-vendu-msg { grid-column: 1 / -1; margin: 0; padding: 10px 12px; border-radius: var(--r-sm); background: #fef2f2; color: #991b1b; font-weight: 600; font-size: .86rem; }
+
+/* ── Paiement échelonné, reprise ── */
+.auto-h0 { margin-top: 0; }
+.auto-credit-grille { display: grid; grid-template-columns: 1fr; gap: 4px; }
+.auto-credit-grille label { font-weight: 700; font-size: .82rem; color: var(--ink); margin-top: 4px; }
+.auto-mensualite { margin: 12px 0 2px; font-size: 1.35rem; font-weight: 800; color: var(--brand); }
+.auto-note { margin: 4px 0 8px; color: var(--text); font-size: .86rem; line-height: 1.45; }
+.auto-petit { margin: 6px 0 10px; color: var(--muted); font-size: .74rem; }
+.auto-btn-large { width: 100%; margin-top: 4px; }
+.shop-info .auto-btn-large { margin-top: 12px; }
+.auto-textarea { min-height: 80px; resize: vertical; }
+.auto-modal .order-form select, .auto-modal .order-form textarea { width: 100%; }
+.auto-commerciaux { display: grid; gap: 8px; }
+.auto-conseillers { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 0; }
+.auto-conseillers .auto-note { flex-basis: 100%; margin: 0; }
+.auto-conseillers a { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-weight: 700; font-size: .86rem; text-decoration: none; }
+.auto-ico { flex: none; width: 18px; text-align: center; }
+
+/* ── Galerie : jusqu'à 12 photos → vignettes sur UNE ligne qui défile au doigt (au lieu de 3 lignes) ── */
+.g-thumbs { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 24px) / 4.4); overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 4px; scrollbar-width: thin; }
+.g-thumb { scroll-snap-align: start; }
